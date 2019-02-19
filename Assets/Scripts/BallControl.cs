@@ -9,11 +9,11 @@ public class BallControl : MonoBehaviour {
     private Rigidbody2D rb2d;
 
     void Start() {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
         StartBallAfter1Second();
     }
 
-    void ResetBall() {
+    public void ResetBall() {
         rb2d.velocity = Vector2.zero;
         transform.position = Vector2.zero;
     }

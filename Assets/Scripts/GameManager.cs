@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
-    public GameObject theBall;
-    public int winScore = 5;
+    public GameObject ball;
+
+    public int balls = 1;
+    public int winScore = 3;
     public GameObject continueButton;
     public GameObject labelPause;
     public Text scoreP1;
@@ -31,9 +33,12 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        theBall.SetActive(true);
         continueButton.SetActive(false);
         winScores.text = "Win scores: " + winScore;
+
+        /*for (int i = 0; i < balls - 1; i++)
+            Instantiate(ball);*/
+
     }
 
     public void Score(string wallID) {
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour {
         victory = true;
         continueButton.SetActive(true);
         winner.text = "PLAYER " + name + " WINS";
-        theBall.SendMessage("ResetBall");
+        ball.GetComponent<BallControl>().ResetBall();
     }
 
     public void RestartGame() {
@@ -69,7 +74,7 @@ public class GameManager : MonoBehaviour {
         victory = false;
         continueButton.SetActive(false);
         labelPause.SetActive(false);
-        theBall.SendMessage("StartBallAfter1Second");
+        ball.GetComponent<BallControl>().StartBallAfter1Second();
     }
 
     public void Continue() {
@@ -77,7 +82,7 @@ public class GameManager : MonoBehaviour {
         playerScore2 = 0;
         UpdateAllTexts();
         victory = false;
-        theBall.SendMessage("StartBallAfter1Second");
+        ball.GetComponent<BallControl>().StartBallAfter1Second();
         continueButton.SetActive(false);
     }
 
